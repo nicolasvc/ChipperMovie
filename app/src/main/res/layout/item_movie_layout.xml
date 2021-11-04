@@ -3,32 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardCornerRadius="10dp"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_baseline_movie_filter_24"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:contentDescription="@string/image_movie"
+            android:src="@drawable/ic_baseline_movie_filter_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/text_view_tittle_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="@string/name_movie"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintStart_toEndOf="@+id/image_view"
+            app:layout_constraintTop_toTopOf="@+id/image_view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

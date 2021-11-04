@@ -1,47 +1,80 @@
 package com.example.chippermovie.screens.listmovie
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.chippermovie.Constants
 import com.example.chippermovie.R
 import com.example.chippermovie.networking.Movie
+import kotlinx.android.synthetic.main.item_movie_layout.view.*
+
+import androidx.annotation.NonNull
+
+import android.widget.ProgressBar
+
+
+
+
+
+
+
 
 class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
+
+    private val VIEW_TYPE_ITEM = 0
+    private val VIEW_TYPE_LOADING = 1
+
+
+    private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
 
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            TODO("not implemented")
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            TODO("not implemented")
+            return oldItem.equals(newItem)
         }
 
     }
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
+    override fun getItemViewType(position: Int): Int {
+        return if (differ.currentList[position] == null) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType === VIEW_TYPE_ITEM) {
+            MoviesViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_movie_layout,
+                    parent,
+                    false
+                ),
+                interaction)
+        } else {
+            val view: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_loading, parent, false)
+            LoadingViewHolder(view)
+        }
 
-        return MoviesViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_movie_layout,
-                parent,
-                false
-            ),
-            interaction
-        )
+
+
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MoviesViewHolder -> {
-                holder.bind(differ.currentList.get(position))
+                holder.bind(differ.currentList[position])
+            }
+            is LoadingViewHolder -> {
+                showLoadingView(holder,position)
             }
         }
     }
@@ -54,6 +87,15 @@ class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :
         differ.submitList(list)
     }
 
+    private class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
+    }
+
+    private fun showLoadingView(viewHolder: LoadingViewHolder, position: Int) {
+        viewHolder.progressBar.visibility = View.VISIBLE
+    }
+
+
     class MoviesViewHolder
     constructor(
         itemView: View,
@@ -62,12 +104,14 @@ class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :
 
         fun bind(item: Movie) = with(itemView) {
             itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
+                interaction?.onItemSelected(item)
             }
+            itemView.text_view_tittle_movie.text = item.title
+            Glide.with(itemView.context).load(Constants.URL_IMAGE_DATABASE+item.posterPath).into(itemView.image_view)
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: Movie)
+        fun onItemSelected(item: Movie)
     }
 }

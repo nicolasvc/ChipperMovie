@@ -1,6 +1,6 @@
 package com.example.chippermovie.di.presentation
 
-import com.example.chippermovie.ListMoviesActivity
+import com.example.chippermovie.screens.listmovie.ListMoviesActivity
 import dagger.Subcomponent
 
 

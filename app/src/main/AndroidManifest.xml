@@ -14,7 +14,7 @@
         android:name=".MyApplication"
         android:theme="@style/Theme.ChipperMovie">
         <activity
-            android:name=".ListMoviesActivity"
+            android:name=".screens.listmovie.ListMoviesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

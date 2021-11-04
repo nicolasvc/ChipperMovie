@@ -1,13 +1,13 @@
 package com.example.chippermovie.usecase.movie
 
 import com.example.chippermovie.networking.Movie
-import com.example.chippermovie.networking.MoviedatabaseApi
+import com.example.chippermovie.networking.MovieDatabaseApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FetchListMovie @Inject constructor(private val movieDatabaseApi: MoviedatabaseApi) {
+class FetchListMovie @Inject constructor(private val movieDatabaseApi: MovieDatabaseApi) {
 
     sealed class Result{
         data class Success(val movies:List<Movie>) :Result()

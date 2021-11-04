@@ -2,7 +2,7 @@ package com.example.chippermovie.di.app
 
 import android.app.Application
 import com.example.chippermovie.di.presentation.PresentationComponent
-import com.example.chippermovie.networking.MoviedatabaseApi
+import com.example.chippermovie.networking.MovieDatabaseApi
 import dagger.Component
 
 
@@ -12,7 +12,7 @@ interface AppComponent {
 
     fun application():Application
 
-    fun moviedatabaseApi():MoviedatabaseApi
+    fun moviedatabaseApi():MovieDatabaseApi
 
     fun newPresentationComponent():PresentationComponent
 
