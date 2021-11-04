@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ChipperMovie</string>
+    <string name="image_movie">ImageMovie</string>
+    <string name="name_movie">Name Movie</string>
+</resources>
