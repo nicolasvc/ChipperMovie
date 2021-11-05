@@ -1,8 +1,9 @@
 package com.example.chippermovie.di.app
 
 import android.app.Application
-import com.example.chippermovie.di.presentation.PresentationComponent
-import com.example.chippermovie.networking.MovieDatabaseApi
+import com.example.chippermovie.di.activity.ActivityComponent
+import com.example.chippermovie.networking.MovieDatabaseApiV3
+import com.example.chippermovie.networking.MovieDatabaseApiV4
 import dagger.Component
 
 
@@ -12,10 +13,11 @@ interface AppComponent {
 
     fun application():Application
 
-    fun moviedatabaseApi():MovieDatabaseApi
+    fun moviedatabaseApiV4(): MovieDatabaseApiV4
 
-    fun newPresentationComponent():PresentationComponent
+    fun moviedatabaseApiV3(): MovieDatabaseApiV3
 
-    //TODO CREAR EL COMPONENTE DE LA ACTIVIDAD
+    fun newActivityComponentBuilder():ActivityComponent.Builder
+
 
 }

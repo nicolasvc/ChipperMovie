@@ -2,18 +2,13 @@ package com.example.chippermovie.screens.listmovie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ScrollView
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.chippermovie.R
 import com.example.chippermovie.common.decoration.TopSpacingItemDecoration
 import com.example.chippermovie.common.viewmvc.BaseViewMvc
-import com.example.chippermovie.networking.Movie
-import androidx.annotation.NonNull
-
-
+import com.example.chippermovie.networking.models.movie.Movie
 
 
 class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
@@ -22,7 +17,7 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
 
     interface Listener {
         fun onRefreshClicked()
-        fun onQuestionClicked(movieClicked:Movie)
+        fun onQuestionClicked(movieClicked: Movie)
         fun onLoadMoreMovies()
     }
 
@@ -74,25 +69,6 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
             }
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     fun bindMovies(movies:List<Movie>){
         moviesAdapter.submitList(movies)

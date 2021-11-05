@@ -3,24 +3,15 @@ package com.example.chippermovie.screens.listmovie
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chippermovie.Constants
 import com.example.chippermovie.R
-import com.example.chippermovie.networking.Movie
+import com.example.chippermovie.networking.models.movie.Movie
 import kotlinx.android.synthetic.main.item_movie_layout.view.*
-
-import androidx.annotation.NonNull
-
-import android.widget.ProgressBar
-
-
-
-
-
-
 
 
 class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :

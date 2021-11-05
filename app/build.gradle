@@ -5,7 +5,8 @@ apply plugin: 'kotlin-kapt'
 
 
 def config = {k-> "\"${project.property(k)}\"" }
-def base_url = "BASE_URL"
+def base_url_v4 = "BASE_URL_V4"
+def base_url_v3 = "BASE_URL_V3"
 def access_token = "ACCESS_TOKEN"
 def api_key = "API_KEY"
 def base_url_image = "BASE_URL_IMAGE"
@@ -29,7 +30,8 @@ android {
         debug{
             minifyEnabled false
             debuggable = true
-            buildConfigField("String",base_url ,config("develop.base.url"))
+            buildConfigField("String",base_url_v4 ,config("develop.base.urlv4"))
+            buildConfigField("String",base_url_v3 ,config("develop.base.urlv3"))
             buildConfigField("String",base_url_image,config("develop.imagen.url"))
             buildConfigField("String",access_token,config("develop.access.token"))
             buildConfigField("String",api_key,config("develop.api.key"))
@@ -38,7 +40,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String",base_url ,config("release.base.url"))
+            buildConfigField("String",base_url_v4 ,config("release.base.urlv4"))
+            buildConfigField("String",base_url_v3 ,config("release.base.urlv3"))
             buildConfigField("String",base_url_image,config("release.imagen.url"))
             buildConfigField("String",access_token,config("release.access.token"))
             buildConfigField("String",api_key,config("release.api.key"))

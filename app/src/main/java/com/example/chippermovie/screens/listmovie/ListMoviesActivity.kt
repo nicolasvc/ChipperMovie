@@ -1,9 +1,10 @@
 package com.example.chippermovie.screens.listmovie
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import com.example.chippermovie.common.screens.BaseActivity
-import com.example.chippermovie.networking.Movie
+import com.example.chippermovie.common.screens.ScreensNavigator
+import com.example.chippermovie.common.screens.activities.BaseActivity
+import com.example.chippermovie.common.viewmvc.ViewMvcFactory
+import com.example.chippermovie.networking.models.movie.Movie
 import com.example.chippermovie.usecase.movie.FetchListMovie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,16 +18,24 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var pagination:Int = 1
 
-    private lateinit var listMovieViewMvc: ListMovieViewMvc
+    @Inject
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     @Inject
     lateinit var fetchListMovie:FetchListMovie
 
+    @Inject
+    lateinit var screensNavigator: ScreensNavigator
+
+    private lateinit var listMovieViewMvc:ListMovieViewMvc
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listMovieViewMvc = ListMovieViewMvc(LayoutInflater.from(this),null)
-        setContentView(listMovieViewMvc.rootView)
         initInjection()
+        listMovieViewMvc = viewMvcFactory.newListMovieMvc(null)
+        setContentView(listMovieViewMvc.rootView)
+
 
     }
 
@@ -63,7 +72,7 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener {
     }
 
     override fun onQuestionClicked(movieClicked: Movie) {
-
+        screensNavigator.toDetailMovie(movieClicked.id)
     }
 
     override fun onLoadMoreMovies() {

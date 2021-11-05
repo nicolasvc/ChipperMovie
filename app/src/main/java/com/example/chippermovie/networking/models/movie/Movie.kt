@@ -1,4 +1,4 @@
-package com.example.chippermovie.networking
+package com.example.chippermovie.networking.models.movie
 
 
 import com.google.gson.annotations.SerializedName
