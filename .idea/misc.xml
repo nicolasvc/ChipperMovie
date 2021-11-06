@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/activity_detail_movie.xml" value="0.3697916666666667" />
+        <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/activity_detail_movie.xml" value="0.3138780804150454" />
         <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/activity_main.xml" value="0.2931461601981833" />
         <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/item_loading.xml" value="0.3697916666666667" />
         <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/item_movie_layout.xml" value="0.29528985507246375" />
+        <entry key="..\:/Users/morfeo/AndroidStudioProjects/ChipperMovie/app/src/main/res/layout/item_production_companie.xml" value="0.3697916666666667" />
       </map>
     </option>
   </component>

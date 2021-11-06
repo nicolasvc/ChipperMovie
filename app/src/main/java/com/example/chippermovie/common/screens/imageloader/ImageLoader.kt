@@ -10,7 +10,8 @@ class ImageLoader @Inject constructor(private val activity: AppCompatActivity) {
 
     private val requestOptions = RequestOptions().centerCrop()
 
-    fun loadImagen(imageUrl:String,target: ImageView){
+    fun loadImage(imageUrl: String, target: ImageView) {
+        if (imageUrl.isEmpty()) return
         Glide.with(activity).load(imageUrl).apply(requestOptions).into(target)
     }
 

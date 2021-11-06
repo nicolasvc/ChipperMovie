@@ -2,4 +2,17 @@
     <string name="app_name">ChipperMovie</string>
     <string name="image_movie">ImageMovie</string>
     <string name="name_movie">Name Movie</string>
+    <string name="title_movie">title_movie</string>
+    <string name="backdropimage">backDropImage</string>
+    <string name="poster_image">poster_image</string>
+    <string name="release_date">Release date</string>
+    <string name="language">Language</string>
+    <string name="runtime">Runtime</string>
+    <string name="movie_language">Movie language</string>
+    <string name="release_movie">Release movie</string>
+    <string name="overview">Overview</string>
+    <string name="overview_movie">Overview movie</string>
+    <string name="productor_company_image">productor company image</string>
+    <string name="name_producer_company">Name productor company</string>
+    <string name="production_companies">Production companies</string>
 </resources>

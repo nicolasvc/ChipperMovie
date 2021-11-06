@@ -31,6 +31,7 @@ class DetailMovieActivity : BaseActivity(),DetailMovieMvc.Listener {
         super.onCreate(savedInstanceState)
         initInjection()
         detailMovieMvc  = viewMvcFactory.newDetailMoviewMvc(null)
+        setContentView(detailMovieMvc.rootView)
         movieId = intent.extras!!.getInt(EXTRA_MOVIE_ID)
     }
 
@@ -49,7 +50,7 @@ class DetailMovieActivity : BaseActivity(),DetailMovieMvc.Listener {
             try {
                when(val result = fetchDetailMovieMvc.fetchDetailMovie(movieId as Int)){
                    is FetchDetailMovie.Result.Success->{
-                       //listMovieViewMvc.bindMovies(result.movies)
+                       detailMovieMvc.bindDetailsMovies(result.detailMovie)
                    }
                    is FetchDetailMovie.Result.Failure -> {
                        //TODO MOSTRAR ERROR
