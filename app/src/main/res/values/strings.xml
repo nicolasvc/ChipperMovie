@@ -15,4 +15,12 @@
     <string name="productor_company_image">productor company image</string>
     <string name="name_producer_company">Name productor company</string>
     <string name="production_companies">Production companies</string>
+    <string name="filter">Filter</string>
+    <string name="title">Title</string>
+    <string name="the_marvel_universe">The marvel universe</string>
+    <string name="_2012_oscars_for_best_picture">2012 Oscars for best picture</string>
+    <string name="dc_comics_universe">DC Comics universe</string>
+    <string name="_2011_oscars_for_best_picture">2011 Oscars for best picture</string>
+    <string name="the_avengers">The avengers</string>
+    <string name="films_d_j_vus">Films déjà vus</string>
 </resources>

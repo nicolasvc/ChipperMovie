@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface MovieDatabaseApiV4 {
 
-    @GET("list/2?api_key="+Constants.API_KEY +"&access_token="+ Constants.ACCESS_TOKEN_API)
+    @GET("list/3?api_key="+Constants.API_KEY +"&access_token="+ Constants.ACCESS_TOKEN_API)
     suspend fun getListMovies(@Query("page") page:Int) : Response<MovieListResponseSchema>
 
 }

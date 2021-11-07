@@ -46,11 +46,11 @@ class AppModule(val application: Application) {
 
     @Provides
     @AppScope
-    fun moviedatabaseApiV4(@RetrofitV4 retrofit: Retrofit):MovieDatabaseApiV4 =  retrofit.create(MovieDatabaseApiV4::class.java)
+    fun movieDatabaseApiV4(@RetrofitV4 retrofit: Retrofit):MovieDatabaseApiV4 =  retrofit.create(MovieDatabaseApiV4::class.java)
 
     @Provides
     @AppScope
-    fun moviedatabaseApiV3(@RetrofitV3 retrofit: Retrofit):MovieDatabaseApiV3 =  retrofit.create(MovieDatabaseApiV3::class.java)
+    fun movieDatabaseApiV3(@RetrofitV3 retrofit: Retrofit):MovieDatabaseApiV3 =  retrofit.create(MovieDatabaseApiV3::class.java)
 
 
 
