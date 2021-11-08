@@ -1,16 +1,24 @@
 package com.example.chippermovie.screens.listmovie
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.chippermovie.Constants
 import com.example.chippermovie.R
 import com.example.chippermovie.common.decoration.TopSpacingItemDecoration
 import com.example.chippermovie.common.viewmvc.BaseViewMvc
+import com.example.chippermovie.networking.MovieGenreSchema
 import com.example.chippermovie.networking.models.movie.Movie
+import com.example.chippermovie.repository.genrerepository.MovieGenreRepository
+import com.example.chippermovie.room.entities.MovieGenreEntity
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -27,6 +35,8 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
 
     private val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
     private val constrainFather: ConstraintLayout = findViewById(R.id.constrain_padre)
+    private val textViewNetworkStatus:TextView = findViewById(R.id.textViewNetworkStatus)
+    private val networkStatusLayout:LinearLayout = findViewById(R.id.networkStatusLayout)
     private val recyclerView: RecyclerView
     private lateinit var moviesAdapter: RecyclerMoviesAdapter
     var isLoading = false
@@ -34,6 +44,7 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     private var sizeListMovie: Int = 0
     private var paginationMovie: Int = 0
     private var currentPage: Int = 1
+    private val movieGenreRepository:MovieGenreRepository = MovieGenreRepository()
 
 
     init {
@@ -45,7 +56,7 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
 
 
     private fun initRecyclerView() {
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         val topSpacing = TopSpacingItemDecoration(10)
         recyclerView.addItemDecoration(topSpacing)
         moviesAdapter = RecyclerMoviesAdapter(this)
@@ -76,13 +87,44 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
         })
     }
 
+    fun saveGenreMovie(movieGenre: MovieGenreSchema) {
+        movieGenre.genres.forEach {  genre ->
+            movieGenreRepository.insertMovieGenre(
+                MovieGenreEntity(genre.id,genre.name)
+            )
+        }
+    }
 
-    fun bindSizeList(totalResultsMovie: Int) {
-        if (totalResultsMovie.mod(2) == 1)
-            totalResultsMovie + 1
+    fun notifyConnectionLost(){
+        textViewNetworkStatus.text = context.getString(R.string.text_no_connectivity)
+        networkStatusLayout.apply {
+            View.VISIBLE
+            setBackgroundColor(context.getColor(R.color.colorStatusNotConnected))
+        }
+    }
 
-        sizeListMovie += totalResultsMovie
-        sizeListMovie /= 2
+    fun notifyBackOnline(){
+        if (moviesAdapter.itemCount == 0) {
+            loadMoreMovies()
+        }
+        textViewNetworkStatus.text = context.getString(R.string.text_connectivity)
+        networkStatusLayout.apply {
+            setBackgroundColor(context.getColor(R.color.colorStatusConnected))
+            animate()
+                .alpha(1f)
+                .setStartDelay(Constants.ANIMATION_DURATION)
+                .setDuration(Constants.ANIMATION_DURATION)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        View.GONE
+                    }
+                })
+        }
+    }
+
+
+    fun bindSizeList() {
+        sizeListMovie = listMovies.size
     }
 
     fun bindPagesMovies(pagesMovie: Int) {
@@ -90,8 +132,8 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     }
 
     fun bindMovies(movies: List<Movie>) {
-        listMovies.toMutableList().addAll(movies)
-        moviesAdapter.submitList(movies)
+        listMovies = ArrayList(movies.map { it.copy() })
+        moviesAdapter.submitList(listMovies)
     }
 
     fun showProgressIndication() {
@@ -104,12 +146,11 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
         }
     }
 
-
     fun validatePaginationMovie() {
-        if (paginationMovie > currentPage + 1){
+        if (currentPage + 1 > paginationMovie){
             showSnackBar()
         }else{
-            currentPage + 1
+            currentPage  += currentPage + 1
             loadMoreMovies()
         }
     }

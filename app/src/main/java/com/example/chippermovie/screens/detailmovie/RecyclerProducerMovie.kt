@@ -24,14 +24,14 @@ class RecyclerProducerMovie(
             oldItem: ProductionCompany,
             newItem: ProductionCompany
         ): Boolean {
-            TODO("not implemented")
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
             oldItem: ProductionCompany,
             newItem: ProductionCompany
         ): Boolean {
-            TODO("not implemented")
+            return oldItem.equals(newItem)
         }
 
     }

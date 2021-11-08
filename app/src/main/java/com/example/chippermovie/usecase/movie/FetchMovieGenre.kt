@@ -1,26 +1,26 @@
 package com.example.chippermovie.usecase.movie
 
-import com.example.chippermovie.networking.MovieDatabaseApiV4
-import com.example.chippermovie.networking.MovieListResponseSchema
+import com.example.chippermovie.networking.MovieDatabaseApiV3
+import com.example.chippermovie.networking.MovieGenreSchema
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FetchListMovie @Inject constructor(private val movieDatabaseApiV4: MovieDatabaseApiV4) {
+class FetchMovieGenre @Inject constructor(private val movieDatabaseApiV3: MovieDatabaseApiV3) {
+
 
     sealed class Result{
-        data class Success(val movies:MovieListResponseSchema) :Result()
+        data class Success(val movieGenre: MovieGenreSchema) :Result()
         object Failure:Result()
     }
 
-
-    suspend fun fetchListMovie(page:Int,categoryId:Int): Result{
+    suspend fun fetchMovieGenre(): Result {
 
         return withContext(Dispatchers.IO){
 
             try {
-                val response = movieDatabaseApiV4.getListMovies(categoryId,page)
+                val response = movieDatabaseApiV3.getMovieGenre()
                 if(response.isSuccessful && response.body() != null){
                     return@withContext Result.Success(response.body()!!)
                 }else{
@@ -35,4 +35,11 @@ class FetchListMovie @Inject constructor(private val movieDatabaseApiV4: MovieDa
             }
         }
     }
+
+
+
+
+
+
+
 }

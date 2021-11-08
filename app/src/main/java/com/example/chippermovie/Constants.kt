@@ -8,4 +8,9 @@ object Constants {
     const val URL_MOVIE_DATABASE_V3 = BuildConfig.BASE_URL_V3
     const val URL_IMAGE_DATABASE = BuildConfig.BASE_URL_IMAGE
     const val GET_DETAIL_MOVIE = "movie/{movieId}?api_key="
+    const val GET_GENRE_MOVIE = "genre/movie/list?api_key="
+
+    const val GET_LIST_MOVIE = "list/{categoryId}?api_key="
+
+    const val ANIMATION_DURATION = 1000L
 }

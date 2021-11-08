@@ -23,4 +23,6 @@
     <string name="_2011_oscars_for_best_picture">2011 Oscars for best picture</string>
     <string name="the_avengers">The avengers</string>
     <string name="films_d_j_vus">Films déjà vus</string>
+    <string name="text_no_connectivity">No Connection</string>
+    <string name="text_connectivity">Back Online</string>
 </resources>

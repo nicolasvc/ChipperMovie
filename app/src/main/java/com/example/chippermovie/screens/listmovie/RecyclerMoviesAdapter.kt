@@ -48,7 +48,8 @@ class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :
                     parent,
                     false
                 ),
-                interaction)
+                interaction
+                )
         } else {
             val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_loading, parent, false)
@@ -99,6 +100,9 @@ class RecyclerMoviesAdapter(private val interaction: Interaction? = null) :
             }
             itemView.text_view_tittle_movie.text = item.title
             Glide.with(itemView.context).load(Constants.URL_IMAGE_DATABASE+item.posterPath).into(itemView.image_view)
+            rating_movie.rating = if (item.voteAverage.toFloat() > 5 )  item.voteAverage.toFloat() / 2 else  item .voteAverage.toFloat()
+            value_rating_movie.text = item.voteAverage.toString()
+            tv_release_date_init.text = item.releaseDate
         }
     }
 

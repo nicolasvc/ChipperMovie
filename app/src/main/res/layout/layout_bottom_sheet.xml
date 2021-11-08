@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_background"
     app:behavior_hideable="false"
     app:behavior_peekHeight="40dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tv_marvel_universe"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
         android:text="@string/the_marvel_universe"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/oscar_best_picture_2"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -33,71 +31,71 @@
         android:gravity="center_vertical"
         android:layout_marginTop="8dp"
         android:text="@string/_2012_oscars_for_best_picture"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_marvel_universe" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/dc_comics"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:text="@string/dc_comics_universe"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/oscar_best_picture_2" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/oscar_best_picture_1"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         android:text="@string/_2011_oscars_for_best_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/dc_comics" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/avengers"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:text="@string/the_avengers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/oscar_best_picture_1" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/film_deja"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:text="@string/films_d_j_vus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/avengers" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
