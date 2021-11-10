@@ -35,8 +35,8 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
 
     private val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
     private val constrainFather: ConstraintLayout = findViewById(R.id.constrain_padre)
-    private val textViewNetworkStatus:TextView = findViewById(R.id.textViewNetworkStatus)
-    private val networkStatusLayout:LinearLayout = findViewById(R.id.networkStatusLayout)
+    private val textViewNetworkStatus: TextView = findViewById(R.id.textViewNetworkStatus)
+    private val networkStatusLayout: LinearLayout = findViewById(R.id.networkStatusLayout)
     private val recyclerView: RecyclerView
     private lateinit var moviesAdapter: RecyclerMoviesAdapter
     var isLoading = false
@@ -44,7 +44,7 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     private var sizeListMovie: Int = 0
     private var paginationMovie: Int = 0
     private var currentPage: Int = 1
-    private val movieGenreRepository:MovieGenreRepository = MovieGenreRepository()
+    private val movieGenreRepository: MovieGenreRepository = MovieGenreRepository()
 
 
     init {
@@ -88,38 +88,34 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     }
 
     fun saveGenreMovie(movieGenre: MovieGenreSchema) {
-        movieGenre.genres.forEach {  genre ->
+        movieGenre.genres.forEach { genre ->
             movieGenreRepository.insertMovieGenre(
-                MovieGenreEntity(genre.id,genre.name)
+                MovieGenreEntity(genre.id, genre.name)
             )
         }
     }
 
-    fun notifyConnectionLost(){
+    fun notifyConnectionLost() {
         textViewNetworkStatus.text = context.getString(R.string.text_no_connectivity)
-        networkStatusLayout.apply {
-            View.VISIBLE
-            setBackgroundColor(context.getColor(R.color.colorStatusNotConnected))
-        }
+        networkStatusLayout.visibility = View.VISIBLE
+        networkStatusLayout.setBackgroundColor(context.getColor(R.color.colorStatusNotConnected))
     }
 
-    fun notifyBackOnline(){
+    fun notifyBackOnline() {
         if (moviesAdapter.itemCount == 0) {
             loadMoreMovies()
         }
         textViewNetworkStatus.text = context.getString(R.string.text_connectivity)
-        networkStatusLayout.apply {
-            setBackgroundColor(context.getColor(R.color.colorStatusConnected))
-            animate()
-                .alpha(1f)
-                .setStartDelay(Constants.ANIMATION_DURATION)
-                .setDuration(Constants.ANIMATION_DURATION)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        View.GONE
-                    }
-                })
-        }
+        networkStatusLayout.setBackgroundColor(context.getColor(R.color.colorStatusConnected))
+        networkStatusLayout.animate()
+            .alpha(1f)
+            .setStartDelay(Constants.ANIMATION_DURATION)
+            .setDuration(Constants.ANIMATION_DURATION)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    networkStatusLayout.visibility = View.GONE
+                }
+            })
     }
 
 
@@ -147,15 +143,15 @@ class ListMovieViewMvc(layoutInflater: LayoutInflater, parent: ViewGroup?) :
     }
 
     fun validatePaginationMovie() {
-        if (currentPage + 1 > paginationMovie){
+        if (currentPage + 1 > paginationMovie) {
             showSnackBar()
-        }else{
-            currentPage  += currentPage + 1
+        } else {
+            currentPage += currentPage + 1
             loadMoreMovies()
         }
     }
 
-    private fun loadMoreMovies(){
+    private fun loadMoreMovies() {
         for (listener in listeners) {
             listener.onLoadMoreMovies(currentPage)
         }

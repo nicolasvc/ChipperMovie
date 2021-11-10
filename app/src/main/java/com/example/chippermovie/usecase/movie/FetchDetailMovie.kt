@@ -33,7 +33,7 @@ class FetchDetailMovie @Inject constructor(private val movieDatabaseApiV3: Movie
                 if(t is CancellationException){
                     return@withContext Result.Failure
                 }else
-                    throw t
+                    return@withContext Result.Failure
             }
         }
     }

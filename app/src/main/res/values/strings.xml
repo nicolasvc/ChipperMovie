@@ -25,4 +25,7 @@
     <string name="films_d_j_vus">Films déjà vus</string>
     <string name="text_no_connectivity">No Connection</string>
     <string name="text_connectivity">Back Online</string>
+    <string name="server_error_dialog_title">Server Error</string>
+    <string name="server_error_dialog_message">Communication with the server failed</string>
+    <string name="server_error_dialog_button_caption">OK</string>
 </resources>

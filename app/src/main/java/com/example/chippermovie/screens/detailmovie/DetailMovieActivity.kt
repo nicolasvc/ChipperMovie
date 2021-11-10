@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.example.chippermovie.common.screens.activities.BaseActivity
+import com.example.chippermovie.common.screens.dialog.DialogsNavigator
 import com.example.chippermovie.common.viewmvc.ViewMvcFactory
 import com.example.chippermovie.usecase.movie.FetchDetailMovie
 import com.example.chippermovie.usecase.movie.FetchListMovie
@@ -23,6 +24,9 @@ class DetailMovieActivity : BaseActivity(),DetailMovieMvc.Listener {
 
     @Inject
     lateinit var fetchDetailMovieMvc: FetchDetailMovie
+
+    @Inject
+    lateinit var dialogsNavigator: DialogsNavigator
 
 
     private lateinit var detailMovieMvc: DetailMovieMvc
@@ -53,7 +57,7 @@ class DetailMovieActivity : BaseActivity(),DetailMovieMvc.Listener {
                        detailMovieMvc.bindDetailsMovies(result.detailMovie)
                    }
                    is FetchDetailMovie.Result.Failure -> {
-                       //TODO MOSTRAR ERROR
+                       onFetchFailed()
                    }
                }
             }finally {
@@ -62,6 +66,11 @@ class DetailMovieActivity : BaseActivity(),DetailMovieMvc.Listener {
 
 
         }
+    }
+
+
+    private fun onFetchFailed() {
+        dialogsNavigator.showServerErrorDialog()
     }
 
 

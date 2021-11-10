@@ -17,4 +17,7 @@ object ActivityModule {
     @Provides
     @ActivityScope
     fun screenNavigator(activity: AppCompatActivity): ScreensNavigator = ScreensNavigator(activity)
+
+    @Provides
+    fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager
 }

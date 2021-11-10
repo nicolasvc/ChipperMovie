@@ -8,6 +8,7 @@ import com.example.chippermovie.R
 import com.example.chippermovie.common.screens.ScreensNavigator
 import com.example.chippermovie.common.screens.activities.BaseActivity
 import com.example.chippermovie.common.screens.activities.ModalBottomSheet
+import com.example.chippermovie.common.screens.dialog.DialogsNavigator
 import com.example.chippermovie.common.utils.network.NetworkUtils
 import com.example.chippermovie.common.viewmvc.ViewMvcFactory
 import com.example.chippermovie.networking.models.movie.Movie
@@ -38,6 +39,9 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener,ModalBotto
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
+    @Inject
+    lateinit var dialogsNavigator: DialogsNavigator
+
     private lateinit var listMovieViewMvc:ListMovieViewMvc
 
     private lateinit var movieViewModel:MovieViewModel
@@ -54,7 +58,8 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener,ModalBotto
     override fun onStart() {
         super.onStart()
         listMovieViewMvc.registerListener(this)
-        getGenreMovie()
+        //getGenreMovie()
+        handleNetworkChanges()
         getMovies()
     }
 
@@ -109,7 +114,7 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener,ModalBotto
 
                     }
                     is FetchListMovie.Result.Failure -> {
-                        //TODO MOSTRAR ERROR
+                        onFetchFailed()
                     }
                 }
             }finally {
@@ -134,6 +139,9 @@ class ListMoviesActivity : BaseActivity() , ListMovieViewMvc.Listener,ModalBotto
         mBottomSheetFragment.show(supportFragmentManager, "MY_BOTTOM_SHEET")
     }
 
+    private fun onFetchFailed() {
+        dialogsNavigator.showServerErrorDialog()
+    }
 
     override fun onRefreshClicked() {
         getMovies()
